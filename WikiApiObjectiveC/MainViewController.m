@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 
 @implementation MainViewController
+@synthesize title, imageView, webView;
 
 @synthesize flipsidePopoverController = _flipsidePopoverController;
 
@@ -24,6 +25,26 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    WikipediaHelper *wikiHelper = [[WikipediaHelper alloc] init];
+    
+    NSString *searchWord = @"Elefant";
+    
+    NSString *htmlSource = [wikiHelper getWikipediaHTMLPage:searchWord];
+    NSString *urlImage = [wikiHelper getUrlOfMainImage:searchWord];
+    
+    if(![urlImage isEqualToString:@""]) {
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+        UIImage *image = [UIImage imageWithData:imageData];
+        imageView.image = image;
+    }
+    
+    title.text = searchWord;
+    [webView loadHTMLString:htmlSource baseURL:nil];
+}
+
+- (IBAction) searchWikipedia:(id *) sender {
+    NSLog(@"Search!");
 }
 
 - (void)viewDidUnload
