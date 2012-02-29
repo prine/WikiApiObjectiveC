@@ -30,7 +30,7 @@
     
     NSString *searchWord = @"Elefant";
     
-    NSString *htmlSource = [wikiHelper fetchWikipediaArticle:searchWord];
+    NSString *article = [wikiHelper getWikipediaHTMLPage:searchWord];
     NSString *htmlSource = [wikiHelper getWikipediaHTMLPage:searchWord];
     NSString *urlImage = [wikiHelper getUrlOfMainImage:searchWord];
     
