@@ -30,3 +30,7 @@ Here is an example of how you should use the WikipediaHelper class:
 You see the main image of the wikipedia article and in the bottom the loaded webview.	
 
 [![](	http://188.40.40.143/~robin/prine.ch/prine_art/img/tools/wikipediahelper.png)](	http://188.40.40.143/~robin/prine.ch/prine_art/img/tools/wikipediahelper.png)
+
+
+NOTE:
+At the moment the api link is forwarded to the german site. Feel free to change the api link in the WikipediaHelper.m file!
