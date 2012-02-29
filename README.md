@@ -2,6 +2,8 @@ WikiApiObjectiveC:
 -----------------
 
 
+Here is an example of how you should use the WikipediaHelper class:
+
 	WikipediaHelper *wikiHelper = [[WikipediaHelper alloc] init];
 
 	NSString *searchWord = @"Elefant";
