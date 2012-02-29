@@ -13,7 +13,7 @@
 }
 
 // Fetches an wikipedia article from the wikipedia api
-- (NSString *) fetchWikipediaArticle:(NSString *)name;
+- (NSString *) getWikipediaArticle:(NSString *)name;
 
 // Returns the HTML page from an wikipedia article search by the name
 - (NSString *) getWikipediaHTMLPage:(NSString *)name;

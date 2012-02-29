@@ -11,7 +11,7 @@
 
 @implementation WikipediaHelper
 
-- (NSString *) fetchWikipediaArticle:(NSString *)name {
+- (NSString *) getWikipediaArticle:(NSString *)name {
     // Create new SBJSON parser object
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     
@@ -45,7 +45,7 @@
 
 - (NSString *) getWikipediaHTMLPage:(NSString *)name {
     // Fetch wikipedia article
-    NSString *htmlSrc = [self fetchWikipediaArticle:name];
+    NSString *htmlSrc = [self getWikipediaArticle:name];
     
     if([htmlSrc isEqualToString:@""])
         return htmlSrc;
@@ -69,7 +69,7 @@
 - (NSString *) getUrlOfMainImage:(NSString *)name {
     
     // Fetch wikipedia article
-    NSString *htmlSrc = [self fetchWikipediaArticle:name];
+    NSString *htmlSrc = [self getWikipediaArticle:name];
     
     // Otherwise images have an incorrect url
     NSString *formatedHtmlSrc = [htmlSrc stringByReplacingOccurrencesOfString:@"//upload.wikimedia.org" withString:@"http://upload.wikimedia.org"];
