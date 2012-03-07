@@ -26,9 +26,9 @@
     [super viewDidLoad];
 
     WikipediaHelper *wikiHelper = [[WikipediaHelper alloc] init];
-    wikiHelper.apiUrl = @"http://en.wikipedia.org";
+    wikiHelper.apiUrl = @"http://de.wikipedia.org";
     
-    NSString *searchWord = @"Tiger";
+    NSString *searchWord = @"Elefant";
     
     // NSString *article = [wikiHelper getWikipediaHTMLPage:searchWord];
     NSString *htmlSource = [wikiHelper getWikipediaHTMLPage:searchWord];
