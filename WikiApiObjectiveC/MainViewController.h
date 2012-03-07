@@ -10,17 +10,17 @@
 #import "WikipediaHelper.h"
 
 @interface MainViewController : UIViewController <FlipsideViewControllerDelegate> {
-    IBOutlet UILabel *title;
-    IBOutlet UIImageView *imageView;
-    IBOutlet UIWebView *webView;
+    IBOutlet UILabel *titleLabel;
+    IBOutlet UIImageView *imgView;
+    IBOutlet UIWebView *websiteView;
 }
 
 - (IBAction) searchWikipedia:(id *) sender;
 
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
-@property (nonatomic, retain) IBOutlet UILabel *title;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, retain) IBOutlet UILabel *titleLabel;
+@property (nonatomic, retain) IBOutlet UIImageView *imgView;
+@property (nonatomic, retain) IBOutlet UIWebView *websiteView;
 
 
 - (IBAction)showInfo:(id)sender;
