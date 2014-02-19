@@ -1,30 +1,27 @@
 WikiApiObjectiveC:
 -----------------
 
-With this very small library your able to load an article from wikipedia api. At the moment
-two different methods are provided:
-
-	// Returns the HTML page from an wikipedia article search by the name
-	- (NSString *) getWikipediaHTMLPage:(NSString *)name;
-
-	// Return the Main image of an wikipedia article search by the name
-	- (NSString *) getUrlOfMainImage:(NSString *)name;
-
------------------
-
+With this simple library you are able to load an article from the wikipedia api. 
 Here is an example of how you should use the WikipediaHelper class:
 
 	WikipediaHelper *wikiHelper = [[WikipediaHelper alloc] init];
 	wikiHelper.apiUrl = @"http://en.wikipedia.org";
+	wikiHelper.delegate = self; // For the new version, we have to set the delegate class
 
-	NSString *searchWord = @"Eels_Band";
+	NSString *searchWord = @"Elephant";
 
-	NSString *htmlSource = [wikiHelper getWikipediaHTMLPage:searchWord];
-	NSString *urlImage = [wikiHelper getUrlOfMainImage:searchWord];
+	[wikiHelper fetchArticle:searchWord];
 	
 	
 The language of the Wikipedia api can be changed in the variable `wikiHelper.apiUrl`.
-You can see this in the above code example.
+
+The call is asynchronously and will call automatically the method dataLoaded if the request is finished.
+Therefore we need to define the delegate class to self and implement the dataLoaded method.
+
+	- (void)dataLoaded:(NSString *)htmlPage withUrlMainImage:(NSString *)urlMainImage {
+    	  NSLog(@"HTML Page: %@", htmlPage);
+          NSLog(@"Main image url: %@", urlMainImage);
+	}
 	
 -----------------
 
