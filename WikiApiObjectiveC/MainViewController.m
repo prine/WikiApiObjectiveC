@@ -27,7 +27,7 @@
     wikiHelper.apiUrl = @"http://en.wikipedia.org";
     wikiHelper.delegate = self;
     
-    NSString *searchWord = @"Robin_Hood";
+    NSString *searchWord = @"Elephant";
     titleLabel.text = searchWord;
     
     [wikiHelper fetchArticle:searchWord];
