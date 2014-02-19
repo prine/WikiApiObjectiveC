@@ -29,6 +29,7 @@
 		CBA4483C18B4C7D2004D7466 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA4483118B4C7D2004D7466 /* AFURLRequestSerialization.m */; };
 		CBA4483D18B4C7D2004D7466 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA4483318B4C7D2004D7466 /* AFURLResponseSerialization.m */; };
 		CBA4483E18B4C7D2004D7466 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA4483518B4C7D2004D7466 /* AFURLSessionManager.m */; };
+		CBA4484018B4C9A6004D7466 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBA4483F18B4C9A6004D7466 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		CBA4483318B4C7D2004D7466 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		CBA4483418B4C7D2004D7466 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
 		CBA4483518B4C7D2004D7466 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
+		CBA4483F18B4C9A6004D7466 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				005487BC14FE54FA001B3D76 /* InfoPlist.strings */,
 				005487BF14FE54FA001B3D76 /* main.m */,
 				005487C114FE54FA001B3D76 /* WikiApiObjectiveC-Prefix.pch */,
+				CBA4483F18B4C9A6004D7466 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				005487BE14FE54FA001B3D76 /* InfoPlist.strings in Resources */,
+				CBA4484018B4C9A6004D7466 /* Default-568h@2x.png in Resources */,
 				005487DD14FE5520001B3D76 /* wikipedia.png in Resources */,
 				CB5403DE18B4B24E00CDF1F8 /* Storyboard.storyboard in Resources */,
 			);
