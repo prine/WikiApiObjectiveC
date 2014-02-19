@@ -7,10 +7,9 @@
 //
 
 #import "WikipediaHelper.h"
-#import "SBJsonParser.h"
 
 @implementation WikipediaHelper
-@synthesize apiUrl, imageBlackList;
+@synthesize apiUrl, imageBlackList, delegate, fetchedArticle;
 
 - (id)init {
     self = [super init];
@@ -35,47 +34,22 @@
     return self;
 }
 
-- (NSString *) getWikipediaArticle:(NSString *)name {
-    // Create new SBJSON parser object
-    SBJsonParser *parser = [[SBJsonParser alloc] init];
-    
-    // JSON Request url
-    NSURLRequest *request;
-    
+- (void) fetchArticle:(NSString *)name {
     NSString *url = [[NSString alloc] initWithFormat:@"%@/w/api.php?action=query&prop=revisions&titles=%@&rvprop=content&rvparse&format=json&redirects", apiUrl, name];
     
-    request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    
-    // Perform request and get JSON back as a NSData object
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    
-    // Get JSON as a NSString from NSData response
-    NSString *json_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-    
-    // parse the JSON response into an object
-    // Here we're using NSArray since we're parsing an array of JSON status objects
-    NSDictionary *wikipediaResponseObject = [parser objectWithString:json_string error:nil];
-    
-    NSArray *htmlTemp = [[[wikipediaResponseObject objectForKey:@"query"] objectForKey:@"pages"] allValues];
-    
-    if(![[htmlTemp objectAtIndex:0] objectForKey:@"revisions"]) {
-        return @"";
-    }
-    
-    NSString *htmlSrc = [[[[htmlTemp objectAtIndex:0] objectForKey:@"revisions"] objectAtIndex:0] objectForKey:@"*"];
-    
-    return htmlSrc;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *htmlTemp = [[[responseObject objectForKey:@"query"] objectForKey:@"pages"] allValues];
+        fetchedArticle = [[[[htmlTemp objectAtIndex:0] objectForKey:@"revisions"] objectAtIndex:0] objectForKey:@"*"];
+        
+        [delegate dataLoaded:[self formatHTMLPage:fetchedArticle] withUrlMainImage:[self getUrlOfMainImage:fetchedArticle]];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [delegate dataLoaded:@"test" withUrlMainImage:@"test"];
+    }];
 }
 
-- (NSString *) getWikipediaHTMLPage:(NSString *)name {
-    // Fetch wikipedia article
-    NSString *htmlSrc = [self getWikipediaArticle:name];
-    
-    if([htmlSrc isEqualToString:@""])
-        return htmlSrc;
-    
-    // NSString *formatedHtmlSrc = [htmlSrc stringByReplacingOccurrencesOfString:@"h3" withString:@"h2"];
-    
+- (NSString *) formatHTMLPage:(NSString *)htmlSrc {
     NSString *wikiString = [NSString stringWithFormat:@"%@/wiki/", apiUrl];
     NSString *ahrefWikiString = [NSString stringWithFormat:@"<a href=\"%@/wiki\"", apiUrl];
     NSString *ahrefWikiStringReplacement = [NSString stringWithFormat:@"<a target=\"blank\" href=\"%@/wiki\"", apiUrl];
@@ -86,17 +60,13 @@
     formatedHtmlSrc = [formatedHtmlSrc stringByReplacingOccurrencesOfString:@"//upload.wikimedia.org" withString:@"http://upload.wikimedia.org"];
     formatedHtmlSrc = [formatedHtmlSrc stringByReplacingOccurrencesOfString:@"class=\"editsection\"" withString:@"style=\"visibility: hidden\""];
     
-    
     // Append html and body tags, Add some style
     formatedHtmlSrc = [NSString stringWithFormat:@"<body style=\"font-size: 13px; font-family: Helvetica, Verdana\">%@<br/><br/><br/>The article above is based on this article of the free encyclopedia Wikipedia and it is licensed under „Creative Commons Attribution/Share Alike“. Here you find versions/authors.</body>", formatedHtmlSrc];
     
     return formatedHtmlSrc;
 }
 
-- (NSString *) getUrlOfMainImage:(NSString *)name {
-    
-    // Fetch wikipedia article
-    NSString *htmlSrc = [self getWikipediaArticle:name];
+- (NSString *) getUrlOfMainImage:(NSString *)htmlSrc {
     
     // Otherwise images have an incorrect url
     NSString *formatedHtmlSrc = [htmlSrc stringByReplacingOccurrencesOfString:@"//upload.wikimedia.org" withString:@"http://upload.wikimedia.org"];

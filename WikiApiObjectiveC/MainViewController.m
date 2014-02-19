@@ -9,9 +9,7 @@
 #import "MainViewController.h"
 
 @implementation MainViewController
-@synthesize titleLabel, imgView, websiteView;
-
-@synthesize flipsidePopoverController = _flipsidePopoverController;
+@synthesize titleLabel, imgView, websiteView, loadingActivity;
 
 - (void)didReceiveMemoryWarning
 {
@@ -27,94 +25,27 @@
 
     WikipediaHelper *wikiHelper = [[WikipediaHelper alloc] init];
     wikiHelper.apiUrl = @"http://en.wikipedia.org";
+    wikiHelper.delegate = self;
     
-    NSString *searchWord = @"Eels_Band";
+    NSString *searchWord = @"Robin_Hood";
+    titleLabel.text = searchWord;
     
-    NSString *htmlSource = [wikiHelper getWikipediaHTMLPage:searchWord];
-    NSString *urlImage = [wikiHelper getUrlOfMainImage:searchWord];
-    
-    if(![urlImage isEqualToString:@""]) {
-        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlImage]];
+    [wikiHelper fetchArticle:searchWord];
+    [loadingActivity startAnimating];
+    loadingActivity.hidden = FALSE;
+}
+
+- (void)dataLoaded:(NSString *)htmlPage withUrlMainImage:(NSString *)urlMainImage {
+    if(![urlMainImage isEqualToString:@""]) {
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlMainImage]];
         UIImage *image = [UIImage imageWithData:imageData];
         imgView.image = image;
     }
     
-    titleLabel.text = searchWord;
-    [websiteView loadHTMLString:htmlSource baseURL:nil];
-}
+    [loadingActivity stopAnimating];
+    loadingActivity.hidden = TRUE;
 
-- (IBAction) searchWikipedia:(id *) sender {
-    NSLog(@"Search!");
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
-    }
-}
-
-#pragma mark - Flipside View Controller
-
-- (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self dismissModalViewControllerAnimated:YES];
-    } else {
-        [self.flipsidePopoverController dismissPopoverAnimated:YES];
-    }
-}
-
-- (IBAction)showInfo:(id)sender
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        FlipsideViewController *controller = [[FlipsideViewController alloc] initWithNibName:@"FlipsideViewController" bundle:nil];
-        controller.delegate = self;
-        controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [self presentModalViewController:controller animated:YES];
-    } else {
-        if (!self.flipsidePopoverController) {
-            FlipsideViewController *controller = [[FlipsideViewController alloc] initWithNibName:@"FlipsideViewController" bundle:nil];
-            controller.delegate = self;
-            
-            self.flipsidePopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-        }
-        if ([self.flipsidePopoverController isPopoverVisible]) {
-            [self.flipsidePopoverController dismissPopoverAnimated:YES];
-        } else {
-            [self.flipsidePopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        }
-    }
+    [websiteView loadHTMLString:htmlPage baseURL:nil];
 }
 
 @end

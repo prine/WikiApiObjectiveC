@@ -6,23 +6,17 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FlipsideViewController.h"
 #import "WikipediaHelper.h"
 
-@interface MainViewController : UIViewController <FlipsideViewControllerDelegate> {
+@interface MainViewController : UIViewController <WikipediaHelperDelegate> {
     IBOutlet UILabel *titleLabel;
     IBOutlet UIImageView *imgView;
     IBOutlet UIWebView *websiteView;
 }
 
-- (IBAction) searchWikipedia:(id *) sender;
-
-@property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 @property (nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property (nonatomic, retain) IBOutlet UIImageView *imgView;
 @property (nonatomic, retain) IBOutlet UIWebView *websiteView;
-
-
-- (IBAction)showInfo:(id)sender;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadingActivity;
 
 @end
