@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>471E0C02-E8C6-46BC-A48F-9CD3E943B4DB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WikiApiObjectiveC</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F45DE5B3-7457-4090-BDDA-08B248238E50</key>
+		<string>https://github.com/prine/WikiApiObjectiveC.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>WikiApiObjectiveC.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F45DE5B3-7457-4090-BDDA-08B248238E50</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/prine/WikiApiObjectiveC.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F45DE5B3-7457-4090-BDDA-08B248238E50</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F45DE5B3-7457-4090-BDDA-08B248238E50</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WikiApiObjectiveC</string>
+		</dict>
+	</array>
+</dict>
+</plist>
