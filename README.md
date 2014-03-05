@@ -1,8 +1,7 @@
 WikiApiObjectiveC:
 ====================
 
-With this simple library you are able to retrieve html page and the main image of an article by a given searchword.
-The library does asynchronously search for the given keyword and return the page (HTML) and the main image (URL) if it has been found.
+With this library you are able to retrieve asynchronously the html page and the main image of an article by a given searchword.
 
 Usage:
 ---------------------
