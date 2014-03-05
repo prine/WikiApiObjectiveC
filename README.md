@@ -38,4 +38,7 @@ The all the links in the Wikipage are working and it is possible to switch to an
 
 Installation:
 ---------------------
-Clone the repository and put the two files WikipediaHelper.h and WikipediaHelper.m into your project. Import the Header file where you need it.
+Clone the repository and put the following files into your project:
+	
+	WikipediaHelper.h
+	WikipediaHelper.m
