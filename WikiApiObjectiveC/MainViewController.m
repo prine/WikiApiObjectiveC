@@ -35,6 +35,8 @@
     loadingActivity.hidden = FALSE;
 }
 
+
+
 - (void)dataLoaded:(NSString *)htmlPage withUrlMainImage:(NSString *)urlMainImage {
     if(![urlMainImage isEqualToString:@""]) {
         NSData *imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: urlMainImage]];
@@ -44,7 +46,7 @@
     
     [loadingActivity stopAnimating];
     loadingActivity.hidden = TRUE;
-
+    
     [websiteView loadHTMLString:htmlPage baseURL:nil];
 }
 
