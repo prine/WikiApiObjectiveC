@@ -1,7 +1,11 @@
 WikiApiObjectiveC:
------------------
+====================
 
-With this simple library you are able to load an article from the wikipedia api. 
+With this simple library you are able to retrieve html page and the main image of an article by a given searchword.
+The library does asynchronously search for the given keyword and return the page (HTML) and the main image (URL) if it has been found.
+
+Usage:
+---------------------
 Here is an example of how you should use the WikipediaHelper class:
 
 	WikipediaHelper *wikiHelper = [[WikipediaHelper alloc] init];
@@ -22,10 +26,16 @@ Therefore we need to define the delegate class to self and implement the dataLoa
     	  NSLog(@"HTML Page: %@", htmlPage);
           NSLog(@"Main image url: %@", urlMainImage);
 	}
-	
------------------
 
+	
+Example:
+---------------------
 You see the main image of the wikipedia article and in the bottom the loaded webview. 
 The all the links in the Wikipage are working and it is possible to switch to another Wikipage by clicking on the link.
 
 [![](	http://188.40.40.143/~robin/prine.ch/prine_art/img/tools/wikipediahelper.png)](	http://188.40.40.143/~robin/prine.ch/prine_art/img/tools/wikipediahelper.png)
+
+
+Installation:
+---------------------
+Clone the repository and put the two files WikipediaHelper.h and WikipediaHelper.m into your project. Import the Header file where you need it.
