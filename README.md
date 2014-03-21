@@ -41,3 +41,7 @@ Clone the repository and put the following files into your project:
 	
 	WikipediaHelper.h
 	WikipediaHelper.m
+	
+Dependencies:
+---------------------
+For all the network requests it is using the AFNetworking 2.0 Library.
