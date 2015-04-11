@@ -76,28 +76,32 @@
         return htmlSrc;
     
     NSArray *splitonce = [formatedHtmlSrc componentsSeparatedByString:@"src=\""];
+    NSUInteger length =  [splitonce count];
+    if (length > 1) {
+        NSString *finalSplitString = [[NSString alloc]  initWithString:[splitonce objectAtIndex:1]];
+        NSArray *finalSplit = [finalSplitString  componentsSeparatedByString:@"\""];
 
-    NSString *finalSplitString = [[NSString alloc]  initWithString:[splitonce objectAtIndex:1]];
-    NSArray *finalSplit = [finalSplitString  componentsSeparatedByString:@"\""];
-
-    NSString *imageURL = [[NSString alloc]  initWithString:[finalSplit objectAtIndex:0]];
-    imageURL = [imageURL stringByTrimmingCharactersInSet:[NSCharacterSet  whitespaceCharacterSet]];
-
-    int i = 1;
-    
-    while([self isOnBlackList:imageURL]) { 
-        // Get the next image tag
-        finalSplitString = [[NSString alloc]  initWithString:[splitonce objectAtIndex:i]];
-        
-        finalSplit = [finalSplitString  componentsSeparatedByString:@"\""];
-        
-        imageURL = [[NSString alloc]  initWithString:[finalSplit objectAtIndex:0]];
+        NSString *imageURL = [[NSString alloc]  initWithString:[finalSplit objectAtIndex:0]];
         imageURL = [imageURL stringByTrimmingCharactersInSet:[NSCharacterSet  whitespaceCharacterSet]];
+
+        int i = 1;
         
-        i++;
-    }
+        while([self isOnBlackList:imageURL]) { 
+            // Get the next image tag
+            finalSplitString = [[NSString alloc]  initWithString:[splitonce objectAtIndex:i]];
+            
+            finalSplit = [finalSplitString  componentsSeparatedByString:@"\""];
+            
+            imageURL = [[NSString alloc]  initWithString:[finalSplit objectAtIndex:0]];
+            imageURL = [imageURL stringByTrimmingCharactersInSet:[NSCharacterSet  whitespaceCharacterSet]];
+            
+            i++;
+        }
     
-    return imageURL;
+        return imageURL;
+    } else {
+        return nil;
+    }
 }
 
 - (BOOL) isOnBlackList:(NSString *)imageURL {
